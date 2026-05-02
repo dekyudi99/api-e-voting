@@ -34,4 +34,10 @@ class VotesController extends Controller
 
         return response()->json(['message' => 'Access code is valid', 'success' => true], 200);
     }
+
+    public function results()
+    {
+        $results = Candidates::withCount('votes')->orderBy('votes_count', 'desc')->get();
+        return response()->json(['results' => $results], 200);
+    }
 }

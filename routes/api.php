@@ -17,6 +17,9 @@ Route::post('/check-access-code', [VotesController::class, 'accessCheck']);
 // Route untuk menampilkan daftar kandidat
 Route::get('/candidates', [CandidatesController::class, 'index']);
 
+// Route untuk hasil voting
+Route::get('/results', [VotesController::class, 'results']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
     Route::post('/resend-otp', [AuthController::class, 'resendOtp'])->middleware('throttle:1,5');
@@ -32,5 +35,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/candidates/{id}', [CandidatesController::class, 'show']);
     Route::post('/candidates/{id}', [CandidatesController::class, 'update']);
     Route::delete('/candidates/{id}', [CandidatesController::class, 'destroy']);
-
 });
