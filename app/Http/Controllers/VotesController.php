@@ -38,6 +38,7 @@ class VotesController extends Controller
     public function results()
     {
         $results = Candidates::withCount('votes')->orderBy('votes_count', 'desc')->get();
-        return response()->json(['results' => $results], 200);
+        $totalVotes = Votes::count();
+        return response()->json(['results' => $results, 'total_votes' => $totalVotes], 200);
     }
 }
